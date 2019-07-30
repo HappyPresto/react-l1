@@ -1,6 +1,6 @@
 import React from 'react'
 import {render} from 'react-dom'
-import ArticleList from './articleList'
+import ArticleList from './components/articleList'
 import {articles} from './fixtures'
 
 function HelloWorld() {
