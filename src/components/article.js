@@ -11,10 +11,19 @@ class Article extends Component {
             text: PropTypes.string
         }).isRequired
     }
+
+    /*constructor(props) {
+        super(props)
+
+        this.state = {
+            isOpen: props.defaultOpen
+        }
+    }*/
+
     render() {
         const {article, isOpen, toggleOpen} = this.props // дистрактулизация
         return (
-            <div>
+            <div ref = {this.setContainerRef}>
                 <h3>{article.title}</h3>
                 <button onClick = {toggleOpen}>
                     {isOpen ? 'Close' : 'Open'}
@@ -22,6 +31,11 @@ class Article extends Component {
                 {this.getBody()}
             </div>
         )
+    }
+
+    setContainerRef = ref => {
+        this.container = ref
+        console.log("---", ref)
     }
 
     getBody() {
@@ -36,7 +50,7 @@ class Article extends Component {
     }
 }
 
-export default toggleOpen(Article)
+export default Article
 /*
 export default function Article(props) {
     const {article} = props // диструлизация
