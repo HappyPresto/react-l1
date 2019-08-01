@@ -1,8 +1,15 @@
 import React, {Component} from 'react'
 import Article from './article'
+import PropTypes from 'prop-types'
 import toggleOpenItem from '../decorators/accordion'
 
 class ArticleList extends Component {
+    static propTypes = {
+        articles: PropTypes.array.isRequired,
+        // from accordion
+        openItemId: PropTypes.string,
+        toggleOpenItem: PropTypes.func.isRequired
+    }
     state = {
         openArticleId: null
     }

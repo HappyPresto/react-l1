@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, PureComponent} from 'react'
 import PropTypes from 'prop-types'
 import CommentsList from './commentList';
 import toggleOpen from '../decorators/toggleOpen'
@@ -12,6 +12,10 @@ class Article extends Component {
         }).isRequired
     }
 
+    state = {
+        updateIndex: 0
+    }
+
     /*constructor(props) {
         super(props)
 
@@ -20,8 +24,14 @@ class Article extends Component {
         }
     }*/
 
+/*  
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.isOpen !== this.props.isOpen
+    }
+*/
     render() {
         const {article, isOpen, toggleOpen} = this.props // дистрактулизация
+        console.log("---", "update article")
         return (
             <div ref = {this.setContainerRef}>
                 <h3>{article.title}</h3>
@@ -35,7 +45,7 @@ class Article extends Component {
 
     setContainerRef = ref => {
         this.container = ref
-        console.log("---", ref)
+//        console.log("---", ref)
     }
 
     getBody() {
@@ -44,7 +54,8 @@ class Article extends Component {
         return (
             <section>
                 {article.text}
-                <CommentsList comments = {article.comments}/>
+                <button onClick = {() => this.setState({updateIndex: this.state.updateIndex + 1})}>Update</button>
+                <CommentsList comments = {article.comments} ref = {this.setContainerRef} key = {this.state.updateIndex}/>
             </section>
         )
     }
