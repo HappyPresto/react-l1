@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Article from './article'
+import Article from './Article/article'
 import PropTypes from 'prop-types'
 import toggleOpenItem from '../decorators/accordion'
 

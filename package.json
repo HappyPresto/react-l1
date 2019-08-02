@@ -39,6 +39,7 @@
     "react-day-picker": "^7.3.0",
     "react-dom": "^16.8.6",
     "react-select": "^1.0.0-rc.5",
-    "react-transition-group": "^4.2.1"
+    "react-transition-group": "^4.2.1",
+    "redux": "^4.0.4"
   }
 }
