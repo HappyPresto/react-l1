@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import propTypes from 'prop-types'
 import Comment from './comment'
 import toggleOpen from '../decorators/toggleOpen'
+import CommentListForm from './commentListForm'
 
 // export default class CommentsList extends Component {  (тогда убираем экспорт внизу)
 function CommentList({comments = [], isOpen, toggleOpen}) {
@@ -10,6 +11,7 @@ function CommentList({comments = [], isOpen, toggleOpen}) {
         <div>
             <button onClick={toggleOpen} >{text}</button>
             {getCommentBody({comments, isOpen})}
+            <CommentListForm />
         </div>
     )
 }
