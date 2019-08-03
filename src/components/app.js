@@ -5,6 +5,7 @@ import ArticleChart from './articlesChart'
 import UserForm from './userForm'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
+import Counter from './Counter'
 
 class App extends Component {
     static propTypes = {
@@ -22,6 +23,7 @@ class App extends Component {
         }))
         return (
             <div>
+                <Counter />
                 <UserForm />
                 <Select options = {options} value = {this.state.selection} onChange = {this.changeSelection}/>
                 <ArticleList articles = {this.props.articles}/>
