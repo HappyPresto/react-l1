@@ -6,6 +6,7 @@ import UserForm from './userForm'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
 import Counter from './Counter'
+import {connect} from 'react-redux'
 
 class App extends Component {
     static propTypes = {
@@ -17,16 +18,11 @@ class App extends Component {
     }
 
     render() {
-        const options = this.props.articles.map(article => ({
-            label: article.title,
-            value: article.id
-        }))
         return (
             <div>
                 <Counter />
                 <UserForm />
-                <Select options = {options} value = {this.state.selection} onChange = {this.changeSelection}/>
-                <ArticleList articles = {this.props.articles}/>
+                <ArticleList />
                 <ArticleChart articles = {this.props.articles}/>
             </div>
         )

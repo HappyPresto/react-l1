@@ -2,6 +2,8 @@ import React, {Component, PureComponent} from 'react'
 import PropTypes from 'prop-types'
 import CommentsList from '../commentList';
 import toggleOpen from '../../decorators/toggleOpen'
+import {connect} from 'react-redux'
+import {deleteArticle} from '../../AC'
 
 class Article extends Component {
     static propTypes = { // тут можно определить переменные и реакт будет их проверять
@@ -38,9 +40,16 @@ class Article extends Component {
                 <button onClick = {toggleOpen}>
                     {isOpen ? 'Close' : 'Open'}
                 </button>
+                <button onClick = {this.handleDelete}>delete me</button>
                     {this.getBody()}
             </div>
         )
+    }
+
+    handleDelete = () => {
+        const {deleteArticle, article} = this.props
+        deleteArticle(article.id)
+        console.log("---", 'deleting Article')
     }
 
     setContainerRef = ref => {
@@ -61,7 +70,7 @@ class Article extends Component {
     }
 }
 
-export default Article
+export default connect(null, {deleteArticle})(Article)
 /*
 export default function Article(props) {
     const {article} = props // диструлизация

@@ -2,9 +2,11 @@ import React, {Component} from 'react'
 import Article from './Article/article'
 import PropTypes from 'prop-types'
 import toggleOpenItem from '../decorators/accordion'
+import {connect} from 'react-redux'
 
 class ArticleList extends Component {
     static propTypes = {
+        // from connect
         articles: PropTypes.array.isRequired,
         // from accordion
         openItemId: PropTypes.string,
@@ -36,4 +38,6 @@ class ArticleList extends Component {
     }
 }
 
-export default toggleOpenItem(ArticleList)
+export default connect(state => ({
+    articles: state.articles
+}))(toggleOpenItem(ArticleList))
