@@ -1,7 +1,7 @@
 export const articles = [
     {
         "id": "56c027",
-        "date": "2016-06-09T15:03:23.000Z",
+        "date": "2019-07-09T15:03:23.000Z",
         "title": "Commodo qui incididunt",
         "text": "Inlabre Commodo qui incididunt Commodo qui incididunt Commodo qui incididunt",
         "comments": [
@@ -24,7 +24,7 @@ export const articles = [
     },
     {
         "id": "56c717",
-        "date": "2018-09-09T15:03:23.000Z",
+        "date": "2019-08-04T15:03:23.000Z",
         "title": "Quis occaecat",
         "text": "Quis fghju sjkgf trturi sdsnmd asdasd njthythj rewedwe vbvnb",
         "comments": [
@@ -47,7 +47,7 @@ export const articles = [
     },
     {
         "id": "56c727",
-        "date": "2018-09-09T15:23:23.000Z",
+        "date": "2019-07-30T15:23:23.000Z",
         "title": "Quis occaecat",
         "text": "Quis fghju sjkgf trturi sdsnmd asdasd njthythj rewedwe vbvnb"
     }
