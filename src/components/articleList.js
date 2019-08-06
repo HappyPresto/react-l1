@@ -38,6 +38,16 @@ class ArticleList extends Component {
     }
 }
 
-export default connect(state => ({
-    articles: state.articles
-}))(toggleOpenItem(ArticleList))
+export default connect(({filters, articles}) => {
+    const {selected, dateRange: {from, to}} = filters
+
+    const filteredArticles = articles.filter(article => {
+        const published = Date.parse(article.date)
+        return (!selected.length || selected.includes(article.id)) &&
+            (!from || !to || (published > frm && published < to))
+    })
+    
+    return {
+        articles: filteredArticles
+    }
+})(toggleOpenItem(ArticleList))
