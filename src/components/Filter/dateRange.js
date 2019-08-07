@@ -13,9 +13,8 @@ class DateRange extends Component {
     }
 
     render() {
-        console.log(this.props.range)
-        const { from, to } = this.props.range;
-        const selectedRange = from && to && `${from.toDateString()} - ${to.toDateString()}`
+        const { from, to } = this.props.range
+        //const selectedRange = from && to && `${from.toDateString()} - ${to.toDateString()}`
         return (
             <div className="date-range">
                 <DayPicker
@@ -23,7 +22,7 @@ class DateRange extends Component {
                     selectedDays={ day => DateUtils.isDayInRange(day, { from, to }) }
                     onDayClick={ this.handleDayClick }
                 />
-                {selectedRange}
+                {from && to && `${from.toDateString()} - ${to.toDateString()}`}
             </div>
         );
     }
