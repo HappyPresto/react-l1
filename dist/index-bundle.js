@@ -1429,6 +1429,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
 
 /***/ }),
 
+/***/ "./src/middlewares/logger.js":
+/*!***********************************!*\
+  !*** ./src/middlewares/logger.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (store) {\n  return function (next) {\n    return function (action) {\n      // каррированная функция 3 аргументов\n      console.log(\"---\", \"state before: \", store.getState());\n      console.log(\"---\", \"dispatching\", action);\n      next(action);\n      console.log(\"---\", \"state after: \", store.getState());\n    };\n  };\n});\n\n//# sourceURL=webpack:///./src/middlewares/logger.js?");
+
+/***/ }),
+
 /***/ "./src/reducer/articles.js":
 /*!*********************************!*\
   !*** ./src/reducer/articles.js ***!
@@ -1449,7 +1461,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _fix
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _fixtures__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../fixtures */ \"./src/fixtures.js\");\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (function () {\n  var commentsState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _fixtures__WEBPACK_IMPORTED_MODULE_0__[\"normalizedComments\"];\n  var action = arguments.length > 1 ? arguments[1] : undefined;\n  var type = action.type,\n      payload = action.payload;\n\n  switch (type) {}\n\n  return commentsState;\n});\n\n//# sourceURL=webpack:///./src/reducer/comments.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _fixtures__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../fixtures */ \"./src/fixtures.js\");\n\nvar commentsMap = _fixtures__WEBPACK_IMPORTED_MODULE_0__[\"normalizedComments\"].reduce(function (acc, comment) {\n  acc[comment.id] = comment;\n  return acc;\n}, {});\n/* harmony default export */ __webpack_exports__[\"default\"] = (function () {\n  var commentsState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : commentsMap;\n  var action = arguments.length > 1 ? arguments[1] : undefined;\n  var type = action.type,\n      payload = action.payload;\n\n  switch (type) {}\n\n  return commentsState;\n});\n\n//# sourceURL=webpack:///./src/reducer/comments.js?");
 
 /***/ }),
 
@@ -1497,7 +1509,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var redu
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"filtratedArticlesSelector\", function() { return filtratedArticlesSelector; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"commentSelectorfactory\", function() { return commentSelectorfactory; });\n/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! reselect */ \"./node_modules/reselect/es/index.js\");\n/* harmony import */ var domain__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! domain */ \"./node_modules/domain-browser/source/index.js\");\n/* harmony import */ var domain__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(domain__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\nvar filterGetter = function filterGetter(state) {\n  return state.filters;\n};\n\nvar articlesGetter = function articlesGetter(state) {\n  return state.articles;\n};\n\nvar commentsGetter = function commentsGetter(state) {\n  return state.comments;\n};\n\nvar idGetter = function idGetter(state, props) {\n  return props.id;\n};\n\nvar filtratedArticlesSelector = Object(reselect__WEBPACK_IMPORTED_MODULE_0__[\"createSelector\"])(articlesGetter, filterGetter, function (articles, filters) {\n  var selected = filters.selected,\n      _filters$dateRange = filters.dateRange,\n      from = _filters$dateRange.from,\n      to = _filters$dateRange.to;\n  return articles.filter(function (article) {\n    var published = Date.parse(article.date);\n    return (!selected.length || selected.includes(article.id)) && (!from || !to || published > from && published < to);\n  });\n});\nvar commentSelectorfactory = function commentSelectorfactory() {\n  return Object(reselect__WEBPACK_IMPORTED_MODULE_0__[\"createSelector\"])(commentsGetter, idGetter, function (comments, id) {\n    return comments.find(function (comment) {\n      return comment.id === id;\n    });\n  });\n};\n\n//# sourceURL=webpack:///./src/selectors/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"filtratedArticlesSelector\", function() { return filtratedArticlesSelector; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"commentSelectorfactory\", function() { return commentSelectorfactory; });\n/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! reselect */ \"./node_modules/reselect/es/index.js\");\n/* harmony import */ var domain__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! domain */ \"./node_modules/domain-browser/source/index.js\");\n/* harmony import */ var domain__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(domain__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\nvar filterGetter = function filterGetter(state) {\n  return state.filters;\n};\n\nvar articlesGetter = function articlesGetter(state) {\n  return state.articles;\n};\n\nvar commentsGetter = function commentsGetter(state) {\n  return state.comments;\n};\n\nvar idGetter = function idGetter(state, props) {\n  return props.id;\n};\n\nvar filtratedArticlesSelector = Object(reselect__WEBPACK_IMPORTED_MODULE_0__[\"createSelector\"])(articlesGetter, filterGetter, function (articles, filters) {\n  var selected = filters.selected,\n      _filters$dateRange = filters.dateRange,\n      from = _filters$dateRange.from,\n      to = _filters$dateRange.to;\n  return articles.filter(function (article) {\n    var published = Date.parse(article.date);\n    return (!selected.length || selected.includes(article.id)) && (!from || !to || published > from && published < to);\n  });\n});\nvar commentSelectorfactory = function commentSelectorfactory() {\n  return Object(reselect__WEBPACK_IMPORTED_MODULE_0__[\"createSelector\"])(commentsGetter, idGetter, function (comments, id) {\n    return comments[id];\n  });\n};\n\n//# sourceURL=webpack:///./src/selectors/index.js?");
 
 /***/ }),
 
@@ -1509,7 +1521,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n/* harmony import */ var _reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../reducer */ \"./src/reducer/index.js\");\n\n\nvar store = Object(redux__WEBPACK_IMPORTED_MODULE_0__[\"createStore\"])(_reducer__WEBPACK_IMPORTED_MODULE_1__[\"default\"]); // вызываем один раз при инициализации приложения\n//dev only\n\nwindow.store = store;\n/* harmony default export */ __webpack_exports__[\"default\"] = (store);\n\n//# sourceURL=webpack:///./src/store/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n/* harmony import */ var _reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../reducer */ \"./src/reducer/index.js\");\n/* harmony import */ var _middlewares_logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../middlewares/logger */ \"./src/middlewares/logger.js\");\n\n\n\nvar enhancer = Object(redux__WEBPACK_IMPORTED_MODULE_0__[\"applyMiddleware\"])(_middlewares_logger__WEBPACK_IMPORTED_MODULE_2__[\"default\"]);\nvar store = Object(redux__WEBPACK_IMPORTED_MODULE_0__[\"createStore\"])(_reducer__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {}, enhancer); // вызываем один раз при инициализации приложения\n//dev only\n\nwindow.store = store;\n/* harmony default export */ __webpack_exports__[\"default\"] = (store);\n\n//# sourceURL=webpack:///./src/store/index.js?");
 
 /***/ })
 
