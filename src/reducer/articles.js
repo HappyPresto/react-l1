@@ -1,9 +1,11 @@
 import {normalizedArticles as defaultArticles} from '../fixtures'
 import {arrToMap} from '../helpers'
 import {DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES} from '../constant'
+import {Map} from 'immutable'
 
+const defaultState = new Map({})
 
-export default (articleState = {}, action) => {
+export default (articleState = defaultState, action) => {
     const {type, payload, response, randomId} = action
     switch (type) {
         //case DELETE_ARTICLE: return articleState.filter(article => article.id !== payload.id)
