@@ -7,6 +7,13 @@ module.exports = {
     path: path.join(__dirname, "/dist"),
     filename: "index-bundle.js"
   },
+	devServer: {
+		proxy: [{
+			path: '/api/',
+			target: 'http://localhost:3001'
+		}],
+		historyApiFallback: true
+	},
   module: {
     rules: [
       {

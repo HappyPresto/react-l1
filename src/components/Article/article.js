@@ -64,7 +64,7 @@ class Article extends Component {
             <section>
                 {article.text}
                 <button onClick = {() => this.setState({updateIndex: this.state.updateIndex + 1})}>Update</button>
-                <CommentsList comments = {article.comments} ref = {this.setContainerRef} key = {this.state.updateIndex}/>
+                <CommentsList article = {article} ref = {this.setContainerRef} key = {this.state.updateIndex}/>
             </section>
         )
     }

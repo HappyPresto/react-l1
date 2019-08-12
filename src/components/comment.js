@@ -24,9 +24,10 @@ Comment.propTypes = {
 const mapStateToProps = () => {
     const commentSelector = commentSelectorfactory()
     return (state, ownProps) => {
-        return {
+        return (
+            {
             comment: commentSelector(state, ownProps)
-        }
+        })
     }
 }
 

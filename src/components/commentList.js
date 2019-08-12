@@ -3,15 +3,15 @@ import propTypes from 'prop-types'
 import Comment from './comment'
 import toggleOpen from '../decorators/toggleOpen'
 import CommentForm from './CommentForm/commentListForm'
+import { connect } from 'react-redux'
 
 // export default class CommentsList extends Component {  (тогда убираем экспорт внизу)
-function CommentList({comments = [], isOpen, toggleOpen}) {
+function CommentList({article, isOpen, toggleOpen}) {
     const text = isOpen ? 'Hide comments' : 'Show comments'
     return (
         <div>
             <button onClick={toggleOpen} >{text}</button>
-            {getCommentBody({comments, isOpen})}
-            <CommentForm />
+            {getCommentBody({article, isOpen})}
         </div>
     )
 }
@@ -23,14 +23,21 @@ CommentList.propTypes = {
     toggleOpen: propTypes.func
 }
 
-function getCommentBody({comments, isOpen}) {
+function getCommentBody({article: {comments = [], id}, isOpen}) {
     if (!isOpen) return null
-    if (!comments.length) return <p>No comments yet</p>
+    if (!comments.length) return 
+        <div>
+            <p>No comments yet</p>
+            <CommentForm articleId = {id} />
+        </div>
 
     return (
-        <ul>
-            {comments.map(id => <li key = {id}><Comment id = {id}/></li>)}
-        </ul>
+        <div>
+            <ul>
+                {comments.map(id => <li key = {id}><Comment id = {id}/></li>)}
+            </ul>
+            <CommentForm articleId = {id} />
+        </div>
     )
 }
 

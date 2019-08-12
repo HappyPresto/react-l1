@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack --mode development --watch",
-    "build": "webpack --mode production"
+    "start": "concurrently \"npm run dev\" \"npm run api\"",
+    "build": "webpack --mode production",
+    "api": "node simple_api/server.js",
+    "dev": "webpack-dev-server --hot --inline"
   },
   "repository": {
     "type": "git",
@@ -34,14 +36,17 @@
     "webpack-cli": "^3.3.6"
   },
   "dependencies": {
+    "concurrently": "^4.1.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-day-picker": "^7.3.0",
     "react-dom": "^16.8.6",
+    "react-hot-loader": "^4.12.10",
     "react-redux": "^7.1.0",
     "react-select": "^1.0.0-rc.5",
     "react-transition-group": "^4.2.1",
     "redux": "^4.0.4",
-    "reselect": "^4.0.0"
+    "reselect": "^4.0.0",
+    "webpack-dev-server": "^3.8.0"
   }
 }
