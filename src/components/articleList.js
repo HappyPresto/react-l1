@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import toggleOpenItem from '../decorators/accordion'
 import {connect} from 'react-redux'
 import {filtratedArticlesSelector} from '../selectors'
+import {loadAllArticles} from '../AC'
 
 class ArticleList extends Component {
     static propTypes = {
@@ -15,6 +16,11 @@ class ArticleList extends Component {
     }
     state = {
         openArticleId: null
+    }
+
+    componentDidMount() {
+        console.log(this.props)
+        this.props.loadAllArticles()
     }
 
     render() {
@@ -43,4 +49,4 @@ export default connect((state) => {
     return {
         articles: filtratedArticlesSelector(state)
     }
-})(toggleOpenItem(ArticleList))
+}, {loadAllArticles})(toggleOpenItem(ArticleList))

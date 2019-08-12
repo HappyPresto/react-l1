@@ -1,10 +1,10 @@
 import {normalizedArticles as defaultArticles} from '../fixtures'
 import {arrToMap} from '../helpers'
-import {DELETE_ARTICLE, ADD_COMMENT} from '../constant'
+import {DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES} from '../constant'
 
 
-export default (articleState = arrToMap(defaultArticles), action) => {
-    const {type, payload, randomId} = action
+export default (articleState = {}, action) => {
+    const {type, payload, response, randomId} = action
     switch (type) {
         //case DELETE_ARTICLE: return articleState.filter(article => article.id !== payload.id)
         case DELETE_ARTICLE: 
@@ -23,6 +23,9 @@ export default (articleState = arrToMap(defaultArticles), action) => {
                     comments: (article.comments || []).concat(randomId) // новую копию комментария, в которую мы добавляем новый айдишник
                 }
             }
+        
+        case LOAD_ALL_ARTICLES:
+            return arrToMap(response)
     }
 
     return articleState
