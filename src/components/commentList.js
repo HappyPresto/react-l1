@@ -4,6 +4,7 @@ import Comment from './comment'
 import toggleOpen from '../decorators/toggleOpen'
 import CommentForm from './CommentForm/commentListForm'
 import { connect } from 'react-redux'
+import {loadComments} from '../AC'
 
 // export default class CommentsList extends Component {  (тогда убираем экспорт внизу)
 function CommentList({article, isOpen, toggleOpen}) {
@@ -41,4 +42,4 @@ function getCommentBody({article: {comments = [], id}, isOpen}) {
     )
 }
 
-export default toggleOpen(CommentList)
+export default connect(null, {loadComments})(toggleOpen(CommentList))
