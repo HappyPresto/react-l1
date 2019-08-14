@@ -1,6 +1,6 @@
 import {DELETE_ARTICLE, INCREMENT, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMMENT, 
     LOAD_ALL_ARTICLES, LOAD_ARTICLE, START, SUCCESS, FAIL} from '../constant'
-import { runInNewContext } from 'vm';
+
 export function increment() {
     return {
         type: INCREMENT
@@ -42,6 +42,7 @@ export function loadAllArticles() {
         callAPI: '/api/article'
     }
 }
+
 export function loadArticle(id) {
     return (dispatch) => {
         dispatch({
@@ -49,7 +50,7 @@ export function loadArticle(id) {
             payload: {id}
         })
 
-        fetch(`/api/articles/${id}`)
+        fetch(`/api/article/${id}`)
             .then(res => res.json())
             .then(response => dispatch({
                 type: LOAD_ARTICLE + SUCCESS,

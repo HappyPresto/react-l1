@@ -1,6 +1,6 @@
 import {normalizedArticles as defaultArticles} from '../fixtures'
 import {arrToMap} from '../helpers'
-import {DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, START, SUCCESS, LOAD_ARTICLE} from '../constant'
+import {DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, START, SUCCESS, FAIL, LOAD_ARTICLE} from '../constant'
 import {OrderedMap, Record} from 'immutable'
 
 const ArticleRecord = Record({
