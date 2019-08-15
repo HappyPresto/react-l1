@@ -1,5 +1,5 @@
 import {DELETE_ARTICLE, INCREMENT, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMMENT, 
-    LOAD_ALL_ARTICLES, LOAD_ARTICLE, START, SUCCESS, FAIL} from '../constant'
+    LOAD_ALL_ARTICLES, LOAD_ARTICLE, LOAD_ALL_COMMENTS, START, SUCCESS, FAIL} from '../constant'
 
 export function increment() {
     return {
@@ -58,6 +58,26 @@ export function loadArticle(id) {
             }))
             .catch(error => dispatch({
                 type: LOAD_ARTICLE + FAIL,
+                payload: {id, error}
+            }))
+    }
+}
+
+export function loadAllComments(commentId) {
+    return (dispatch) => {
+        dispatch({
+            type: LOAD_ALL_COMMENTS + START,
+            payload: {commentId}
+        })
+
+        fetch(`/api/comment/`)
+            .then(res => res.json())
+            .then(response => dispatch({
+                type: LOAD_ALL_COMMENTS + SUCCESS,
+                payload: {id, response}
+            }))
+            .catch(error => dispatch({
+                type: LOAD_ALL_COMMENTS + FAIL,
                 payload: {id, error}
             }))
     }
