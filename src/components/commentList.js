@@ -47,6 +47,7 @@ class CommentList extends Component {
         toggleOpen: propTypes.func
     }
 
+    
     function getCommentBody({article: {comments = [], id}, isOpen}) {
         if (!isOpen) return null
         if (!comments.length) return 
