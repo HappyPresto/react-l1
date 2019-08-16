@@ -15,15 +15,22 @@ class CommentList extends Component {
         user: PropTypes.string
     }*/
 
+    componentDidMount() {
+        const {loadAllComments, article} = this.props
+        loadAllComments(article.comments)
+    }
+
     componentWillReceiveProps({isOpen, loadAllComments, article}) {
-            loadAllComments(article.id)
+        loadAllComments(article.id)
     }
 
     render() {
+        console.log(this.props.loadAllComments)
         const {isOpen, article} = this.props
         const text = isOpen ? 'Hide comments' : 'Show comments'
+        console.log("ARTICLE")
         console.log(article)
-        if (article) return <Loader/>
+        //if (article) return <Loader/>
         return (
             <div>
                 <button onClick={toggleOpen} >{text}</button>

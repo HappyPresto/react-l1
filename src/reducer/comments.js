@@ -4,24 +4,28 @@ import {arrToMap} from "../helpers";
 import {OrderedMap, Record} from 'immutable'
 
 const CommentRecord = Record({
-    comments: []
+    id: null,
+    text: null,
+    user: null
 })
 
-const CommentReducerState = Record({
+const ReducerState = Record({
     loading: false,
     loaded: false,
     commentsEntities: new OrderedMap({})
 })
 
-const commentsMap = new CommentReducerState(defaultComments)
+const commentsMap = new ReducerState()
 
 export default (commentsState = commentsMap, action) => {
-    const {type, payload, randomId} = action
-    switch (type) {   
+    const {type, payload, response, randomId} = action
+    console.log(action)
+    console.log("-- HELLO --")
+    switch (type) {
         case ADD_COMMENT:
             return {...commentsState, [randomId]: payload.comment}
         case LOAD_ALL_COMMENTS + START:
-            return commentsState.setIn(["commentsEntities", payload.id, 'loadind'], true)
+            return commentsState.set('loadind', true)
 
         case LOAD_ALL_COMMENTS + SUCCESS:
             return commentsState
@@ -30,7 +34,7 @@ export default (commentsState = commentsMap, action) => {
                 .set('loaded', true)
 
         case LOAD_ALL_COMMENTS + FAIL:
-            return 0
+            return commentsState.set('loadind', true)
     }
 
     return commentsState
