@@ -74,11 +74,11 @@ export function loadAllComments(commentId) {
             .then(res => res.json())
             .then(response => dispatch({
                 type: LOAD_ALL_COMMENTS + SUCCESS,
-                payload: {id, response}
+                payload: {commentId, response}
             }))
             .catch(error => dispatch({
                 type: LOAD_ALL_COMMENTS + FAIL,
-                payload: {id, error}
+                payload: {commentId, error}
             }))
     }
 }

@@ -36,6 +36,7 @@ export default (articleState = defaultState, action) => {
             return articleState.set('loading', true)
 
         case LOAD_ALL_ARTICLES + SUCCESS:
+            
             return articleState
                 .set('entities', arrToMap(response, ArticleRecord))
                 .set('loading', false)
