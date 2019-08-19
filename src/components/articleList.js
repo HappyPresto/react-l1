@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import {filtratedArticlesSelector} from '../selectors'
 import {loadAllArticles} from '../AC'
 import Loader from './Loader'
+import {NavLink, Route} from 'react-router-dom'
 
 class ArticleList extends Component {
     static propTypes = {
@@ -26,17 +27,25 @@ class ArticleList extends Component {
         const {articles, openItemId, toggleOpenItem, loading} = this.props
         if (loading) return <Loader/>
         const articleElements = articles.map((article) => <li key = {article.id}>
+            <NavLink to = {`/articles/${article.id}`} activeStyle = {{color: 'red'}}>
+                {article.title}
+            </NavLink>
+
+        </li>)
+/*
             <Article 
                 article = {article}
                 isOpen = {article.id === openItemId}
                 toggleOpen = {toggleOpenItem(article.id)}
             />
-        </li>)
-
+*/
         return (
-            <ul>
-                {articleElements}
-            </ul>
+            <div>
+                <ul>
+                    {articleElements}
+                </ul>
+                <Route path = "/articles/:id" Component = {Article} />
+            </div>
         )
     }
 }
