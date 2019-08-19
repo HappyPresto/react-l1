@@ -1,5 +1,6 @@
 import {DELETE_ARTICLE, INCREMENT, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMMENT, 
-    LOAD_ALL_ARTICLES, LOAD_ARTICLE, LOAD_ALL_COMMENTS, START, SUCCESS, FAIL} from '../constant'
+    LOAD_ALL_ARTICLES, LOAD_ARTICLE, LOAD_ALL_COMMENTS, START, SUCCESS, FAIL, LOAD_ARTICLE_COMMENTS} from '../constant'
+import article from '../components/Article/article';
 
 export function increment() {
     return {
@@ -60,6 +61,14 @@ export function loadArticle(id) {
                 type: LOAD_ARTICLE + FAIL,
                 payload: {id, error}
             }))
+    }
+}
+
+export function loadArticleComments(articleId) {
+    return {
+        type: LOAD_ARTICLE_COMMENTS,
+        payload: {articleId},
+        callAPI: `/api/comment?article=${articleId}`
     }
 }
 

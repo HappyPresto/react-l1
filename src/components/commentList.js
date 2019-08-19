@@ -4,7 +4,7 @@ import Comment from './comment'
 import toggleOpen from '../decorators/toggleOpen'
 import CommentForm from './CommentForm/commentListForm'
 import { connect } from 'react-redux'
-import {loadAllComments} from '../AC'
+import {loadArticleComments} from '../AC'
 import Loader from './Loader'
 
 // export default class CommentsList extends Component {  (тогда убираем экспорт внизу)
@@ -15,22 +15,17 @@ class CommentList extends Component {
         user: PropTypes.string
     }*/
 
-    componentDidMount() {
-        const {loadAllComments, article} = this.props
-        loadAllComments(article.comments)
-    }
-
-    componentWillReceiveProps({isOpen, loadAllComments, article}) {
-        loadAllComments(article.id)
+    componentWillReceiveProps({isOpen, article, loadArticleComments}) {
+        if(!this.props.isOpen && isOpen && !article.commentsLoading && !article.commentsLoaded) {
+            loadArticleComments(article.id)
+        }
     }
 
     render() {
-        console.log(this.props.loadAllComments)
-        const {isOpen, article} = this.props
+        const {isOpen, article, toggleOpen} = this.props
         const text = isOpen ? 'Hide comments' : 'Show comments'
         console.log("ARTICLE")
         console.log(article)
-        //if (article) return <Loader/>
         return (
             <div>
                 <button onClick={toggleOpen} >{text}</button>
@@ -48,14 +43,16 @@ class CommentList extends Component {
     }
 
     
-    function getCommentBody({article: {comments = [], id}, isOpen}) {
+    function getCommentBody({article: {comments = [], id, commentsLoaded, commentsLoading}, isOpen}) {
         if (!isOpen) return null
-        if (!comments.length) return 
+        if (commentsLoading) return <Loader />
+        if (!commentsLoaded) return null
+        if (!comments.length) return (
             <div>
                 <p>No comments yet</p>
                 <CommentForm articleId = {id} />
             </div>
-
+        )
         return (
             <div>
                 <ul>
@@ -66,4 +63,4 @@ class CommentList extends Component {
         )
     }
 
-export default connect(null, {loadAllComments})(toggleOpen(CommentList))
+export default connect(null, {loadArticleComments})(toggleOpen(CommentList))
