@@ -1,12 +1,14 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import Articles from './routes/Articles'
+import NewArticle from './routes/NewArticle'
+import NotFound from './routes/NotFound'
 import ArticleChart from './articlesChart'
 import UserForm from './userForm'
 import Filters from './Filter'
 import Counter from './Counter'
 import {connect} from 'react-redux'
-import {HashRouter as Router, Route, NavLink} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route, NavLink} from 'react-router-dom'
 
 class App extends Component {
     static propTypes = {
@@ -28,12 +30,16 @@ class App extends Component {
                         <div><NavLink activeStyle = {{color:'red'}} to="/counter">Counter</NavLink></div>
                         <div><NavLink activeStyle = {{color:'red'}} to="/filters">Filters</NavLink></div>
                         <div><NavLink activeStyle = {{color:'red'}} to="/articles">Articles</NavLink></div>
+                        <div><NavLink activeStyle = {{color:'red'}} to="/articles/new">NewArticles</NavLink></div>
                     </div>
                     <UserForm />    
-                    <Route path = "/counter" component = {Counter} />
-                    <Route path = "/filters" component = {Filters} />
-                    <Route path = "/articles" component = {Articles} />
-                    <ArticleChart articles = {this.props.articles}/>
+                    <Switch>
+                        <Route path = "/counter" component = {Counter} />
+                        <Route path = "/filters" component = {Filters} />
+                        <Route path = "/articles/new" component = {NewArticle} />
+                        <Route path = "/articles" component = {Articles} />
+                        <Route path = "*" component = {NotFound} />
+                    </Switch>
                 </div>
             </Router>
         )

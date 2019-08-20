@@ -13,7 +13,7 @@ class Articles extends Component {
         return (
             <div>
                 <ArticleList />
-                <Route path = "/articles/" render = {this.getIndex} exact />
+                <Route path = "/articles" render = {this.getIndex} exact />
                 <Route path = "/articles/:id" render = {this.getArticle} />
             </div>
         )
