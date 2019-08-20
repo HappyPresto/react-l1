@@ -8,19 +8,24 @@ import Loader from '../Loader'
 
 class Article extends Component {
     static propTypes = { // тут можно определить переменные и реакт будет их проверять
+        id: PropTypes.string.isRequired,
+        isOpen: PropTypes.bool,
+        toggleOpen: PropTypes.func,
+        // from
         article: PropTypes.shape({
-            id: PropTypes.string.isRequired,
-            title: PropTypes.string.isRequired,
+            id: PropTypes.string,
+            title: PropTypes.string,
             text: PropTypes.string
-        }).isRequired
+        })
     }
 
     state = {
         updateIndex: 0
     }
 
-    componentWillReceiveProps({isOpen, loadArticle, article}) {
-        if (isOpen && !article.text && !article.loading) loadArticle(article.id)
+    componentDidMount() {
+        const {loadArticle, article, id} = this.props
+        if (!article || !article.text && !article.loading) loadArticle(id)
     }
     /*constructor(props) {
         super(props)
@@ -37,7 +42,7 @@ class Article extends Component {
 */
     render() {
         const {article, isOpen, toggleOpen} = this.props // дистрактулизация
-        console.log("---", "update article")
+        if (!article) return null
         return (
             <div ref = {this.setContainerRef}>
                 <h3>{article.title}</h3>
@@ -75,7 +80,9 @@ class Article extends Component {
     }
 }
 
-export default connect(null, {deleteArticle, loadArticle})(Article)
+export default connect((state, ownProps) => ({
+    article: state.articles.entities.get(ownProps.id)
+}), {deleteArticle, loadArticle})(Article)
 /*
 export default function Article(props) {
     const {article} = props // диструлизация
