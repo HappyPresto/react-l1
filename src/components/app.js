@@ -9,7 +9,7 @@ import UserForm from './userForm'
 import Filters from './Filter'
 import Counter from './Counter'
 import {connect} from 'react-redux'
-import {BrowserRouter as Router, Switch, Route, NavLink} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route, Redirect, NavLink} from 'react-router-dom'
 
 class App extends Component {
     static propTypes = {
@@ -40,7 +40,8 @@ class App extends Component {
                         <Route path = "/filters" component = {Filters} />
                         <Route path = "/articles/new" component = {NewArticle} />
                         <Route path = "/articles" component = {Articles} />
-                        <Route path = "/comments/:page" component = {CommentsPage} />
+                        <Route path = "/comments" component = {CommentsPage} />
+                        {/*<Redirect from = "/comments/" to = "/comments/1"/>*/}
                         <Route path = "*" component = {NotFound} />
                     </Switch>
                 </div>

@@ -29,17 +29,17 @@ class CommentsPagination extends Component {
     getCommentItems() {
         const {comments, loading} = this.props
         if (loading || !comments) return <Loader />
-        const commentsItems = comments.map(id => <li key={id}><Comment id={id} /></li>)
-        return <ul>{commentsItems}</ul>
+        const commentItems = comments.map(id => <li key={id}><Comment id={id} /></li>)
+        return <ul>{commentItems}</ul>
     }
 
     getPaginator() {
-        const total = this.props
+        const {total} = this.props
         const items = []
         for (let i = 1; i <= Math.floor((total - 1) / 5) + 1; i++) {
             items.push(<li key={i}>
                 <NavLink 
-                    to={`/comments/${id}`} 
+                    to={`/comments/${i}`} 
                     activeStyle={{color: 'red'}}>{i}
                 </NavLink>
             </li>)

@@ -33,8 +33,8 @@ export default (commentsState = commentsMap, action) => {
         case LOAD_COMMENTS_FOR_PAGE + SUCCESS:
             return commentsState
                 .set('total', response.total)
-                .mergeIn(['commentsEntities'], arrToMap(response.records, CommentRecord))
-                .setIn(['pagination', payload.page, 'ids'], response.records.map(connect => comment.id))
+                .mergeIn(['commentsEntities'], arrToMap(response.records, CommentRecord)) // добавляет свежезагруженные комментарии
+                .setIn(['pagination', payload.page, 'ids'], response.records.map(comment => comment.id)) // сохраним массив айдишников для этой страницы
                 .setIn(['pagination', payload.page, 'loading'], false)
     }
 
