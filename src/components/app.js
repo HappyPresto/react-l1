@@ -9,16 +9,25 @@ import UserForm from './userForm'
 import Filters from './Filter'
 import Counter from './Counter'
 import {connect} from 'react-redux'
-import {Switch, Route, Redirect, NavLink} from 'react-router-dom'
-import {ConnectedRouter} from 'react-router-redux'
-import history from '../history'
+import {Switch, BrowserRouter, Route, Redirect, NavLink} from 'react-router-dom'
 
 class App extends Component {
     static propTypes = {
         
     }
 
+    static childContextTypes = {
+        user: PropTypes.string
+    }
+
+    getChildContext() {
+        return {
+            user: this.state.username
+        }
+    }
+
     state = {
+        username: '',
         selection: null,
         selectedDay: undefined 
     }
@@ -26,7 +35,7 @@ class App extends Component {
     render() {
         //const {articles} = this.props
         return (
-            <ConnectedRouter history = {history}>
+            <BrowserRouter>
                 <div>
                     <div>
                         <h2>Main menu</h2>
@@ -36,7 +45,7 @@ class App extends Component {
                         <div><NavLink activeStyle = {{color:'red'}} to="/articles/new">NewArticles</NavLink></div>
                         <div><NavLink activeStyle = {{color:'red'}} to="/comments">CommentsPage</NavLink></div>
                     </div>
-                    <UserForm />    
+                    <UserForm value = {this.state.username} onChange = {this.handleUserChecnge}/>    
                     <Switch>
                         <Route path = "/counter" component = {Counter} />
                         <Route path = "/filters" component = {Filters} />
@@ -47,10 +56,11 @@ class App extends Component {
                         <Route path = "*" component = {NotFound} />
                     </Switch>
                 </div>
-            </ConnectedRouter>
+            </BrowserRouter>
         )
     }
 
+    handleUserChecnge = (username) => this.setState({username})
     changeSelection = selection => {    
         this.setState({selection})
         /*,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import propTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import Comment from './comment'
 import toggleOpen from '../decorators/toggleOpen'
 import CommentForm from './CommentForm/commentListForm'
@@ -9,11 +9,11 @@ import Loader from './Loader'
 
 // export default class CommentsList extends Component {  (тогда убираем экспорт внизу)
 class CommentList extends Component {
-    /*static contextTypes = {
+    static contextTypes = {
         store: PropTypes.object,
         router: PropTypes.object,
         user: PropTypes.string
-    }*/
+    }
 
     componentWillReceiveProps({isOpen, article, loadArticleComments}) {
         if(!this.props.isOpen && isOpen && !article.commentsLoading && !article.commentsLoaded) {
@@ -23,11 +23,11 @@ class CommentList extends Component {
 
     render() {
         const {isOpen, article, toggleOpen} = this.props
+        console.log("---", this.context)
         const text = isOpen ? 'Hide comments' : 'Show comments'
-        console.log("ARTICLE")
-        console.log(article)
         return (
             <div>
+                <h3>user: {this.context.user}</h3>
                 <button onClick={toggleOpen} >{text}</button>
                 {getCommentBody({article, isOpen})}
             </div>
@@ -35,11 +35,11 @@ class CommentList extends Component {
     }
 }
 
-    CommentList.propTypes = {
-        comments: propTypes.array,
+    CommentList.PropTypes = {
+        comments: PropTypes.array,
         // from toggleOpen
-        isOpen: propTypes.bool,
-        toggleOpen: propTypes.func
+        isOpen: PropTypes.bool,
+        toggleOpen: PropTypes.func
     }
 
     
@@ -63,4 +63,4 @@ class CommentList extends Component {
         )
     }
 
-export default connect(null, {loadArticleComments})(toggleOpen(CommentList))
+export default connect(null, {loadArticleComments}, null, {pure: false})(toggleOpen(CommentList))

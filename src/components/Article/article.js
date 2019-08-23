@@ -82,7 +82,11 @@ class Article extends Component {
 
 export default connect((state, ownProps) => ({
     article: state.articles.entities.get(ownProps.id)
-}), {deleteArticle, loadArticle})(Article)
+}), 
+    {deleteArticle, loadArticle},
+    null,    // mergeProps - как с мерджить свойства, которые передаем (обычно редко используют)
+    {pure: false} // option pure:false - отключает shouldComponentUpdate в connect"е
+    )(Article)
 /*
 export default function Article(props) {
     const {article} = props // диструлизация

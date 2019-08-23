@@ -2,6 +2,7 @@ import {DELETE_ARTICLE, INCREMENT, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMM
     LOAD_ALL_ARTICLES, LOAD_ARTICLE, LOAD_ALL_COMMENTS, START, SUCCESS, FAIL, 
     LOAD_ARTICLE_COMMENTS, LOAD_COMMENTS_FOR_PAGE} from '../constant'
 import article from '../components/Article/article';
+import {push, replace} from 'react-router-redux'
 
 export function increment() {
     return {
@@ -53,15 +54,23 @@ export function loadArticle(id) {
         })
 
         fetch(`/api/article/${id}`)
-            .then(res => res.json())
+            .then(res => {
+                if (res.status >= 400) {
+                    throw new Error(res.statusText)
+                }
+                return res.json()
+            })
             .then(response => dispatch({
                 type: LOAD_ARTICLE + SUCCESS,
                 payload: {id, response}
             }))
-            .catch(error => dispatch({
-                type: LOAD_ARTICLE + FAIL,
-                payload: {id, error}
-            }))
+            .catch(error => {
+                dispatch({
+                    type: LOAD_ARTICLE + FAIL,
+                    payload: {id, error}
+                })
+                dispatch(replace('/error'))
+            })
     }
 }
 
